@@ -71,7 +71,7 @@ $cate = $category->read_all();
 					<button type="button" class="btn btn-primary">Categories</button>
 				</div>
 				<div class="header-item-image">
-					<img src="img/logo-lampart.png" alt="">
+					<a href="index.php"><img src="img/logo-lampart.png" alt=""></a>
 				</div>
 			</div>
 			<div class="body-all-list">
