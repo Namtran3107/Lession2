@@ -1,0 +1,132 @@
+button{
+	background-color: transparent;
+	border-color: transparent;
+}
+a:hover{
+	text-decoration: none;
+}
+
+#body-all{
+	width: 100%;
+}
+.body{
+	width: 1200px;
+	margin: 0  auto;
+	margin-top: 50px;
+}
+.btn-primary{
+	margin-left: 20px;
+}
+.header-item-image img {
+	object-fit: cover;
+	width: 200px;
+	hanging-punctuation: 200px;
+}
+.body-all-header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.search-title{
+	width: 100%;
+	border-width: 3px;
+	border-color: #cccccc;
+	height: 40px;
+	padding: 0 10px;
+}
+.body-all-list{
+	margin-top: 20px;
+}
+.return-search{
+	font-weight: 600;
+}
+.body-add-new{
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+.ti-plus{
+	font-size: 30px;
+}
+.icon-add-new-item{
+	background-color: transparent;
+	border: 2px solid blue;
+	border-radius: 50%;
+	color: blue;
+}
+.category-item-header{
+	display: flex;
+	font-weight: 600;
+	justify-content: space-between;
+}
+.category-item-body{
+	display: flex;
+	justify-content: space-between;
+}
+.category-null, .category-number{
+	width: 300px;
+}
+.category-name-header, .category-name-body{
+	flex: 2;
+}
+.category-operations-header, .category-operations-body{
+	flex: 2;
+}
+.category-operations-body{
+	display: flex;
+}
+.ti-files, .ti-trash, .ti-fullscreen{
+	margin-left: 10px;
+	color: blue;
+}
+.ti-eraser{
+	color: blue;
+}
+.body-categories-all{
+	margin-top: 30px;
+}
+.category-list-body{
+	border-top: 1px solid RGB(0,0,0,0.2);
+	margin-top: 10px;
+	padding-top: 10px;
+}
+.footer-all-list{
+	margin-top: 30px;
+	padding-bottom: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+.footer-pre{
+	border: 1px solid black;
+	text-align: center;
+	width: 100px;
+	height: 30px;
+	border-top-left-radius: 7px;
+	border-bottom-left-radius: 7px;
+}
+.footer-next{
+	border: 1px solid black;
+	text-align: center;
+	width: 100px;
+	height: 30px;
+	border-top-right-radius: 7px;
+	border-bottom-right-radius: 7px;
+}
+.footer-item-list{display: flex;}
+
+.footer-number{
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	border: 1px solid black;
+}
+h1{
+	font-size: 20px;
+}
+.modal-body-list{
+	display: flex;
+}
+select{
+	width: 200px;
+}
