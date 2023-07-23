@@ -91,7 +91,7 @@ $cate = $category->read_all();
 							<div class="add-new-title">Search found <span class = "return-search">0</span> results</div>
 							<button class="icon-add-new-item btn" data-toggle="modal" data-target="#modal-add"><div class="ti-plus"></div></button>
 
-
+							<!-- ADD thêm giá trị vào  -->
 							<!-- Modal add -->
 							<div class="modal fade" id="modal-add" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
@@ -152,6 +152,7 @@ $cate = $category->read_all();
 									<div class="category-operations-header">Operations</div>
 								</div>
 							</div>
+							<!-- Sử dụng vòng lặp để gán vào mảng -->
 							<?php 
 							$categories = [];
 							while ($row = $stmt->fetch()) {
@@ -159,331 +160,153 @@ $cate = $category->read_all();
 							}
 							$num = 1;
 							?>
+							<!-- Sử dụng if để ra 2 trường hợp -->
+							<!-- Nếu tìm kiếm sẽ in ra mảng tìm kiếm -->
+							<!-- Trường hợp 2 là in ra tất cả các giá trị trong database -->
 							<?php
 							if (!empty($search_results)){
 								
 								foreach ($search_results as $row){
-									if($row['parent_id'] == 'parentfirst'){
-										$idss = $row['id'];
-										?>
-										<div class="category-list-body" style="display: none;">
-											<div class="category-item-body">
-												<div class="category-number"><?php echo $num; ?></div>
-												<div class="category-name-body"><?php echo $row['category_name']; ?></div>
-												<div class="category-operations-body">
-													<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-fix".$row['id']; ?>"><div class="ti-eraser"></div></button>
-													<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-ss".$row['id']; ?>"><div class="ti-files"></div></button>
-													<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-del".$row['id']; ?>"><div class="ti-trash"></div></button>
-													<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-ct".$row['id']; ?>"><div class="ti-fullscreen"></div></button>
-												</div>
+									?>
+									<div class="category-list-body" style="display: none;">
+										<div class="category-item-body">
+											<div class="category-number"><?php echo $num; ?></div>
+											<div class="category-name-body"><?php echo $row['category_name']; ?></div>
+											<div class="category-operations-body">
+												<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-fix".$row['id']; ?>"><div class="ti-eraser"></div></button>
+												<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-ss".$row['id']; ?>"><div class="ti-files"></div></button>
+												<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-del".$row['id']; ?>"><div class="ti-trash"></div></button>
+												<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-ct".$row['id']; ?>"><div class="ti-fullscreen"></div></button>
 											</div>
 										</div>
-										<!-- Modal Fix -->
-										<div class="modal fade" id="<?php echo "modal-fix".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel">Modal Fix</h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<form action="index.php" method="POST">
-														<div class="modal-body">
-															<div class="modal-body-list">
-																<div class="input-group mb-3">
-																	<div class="input-group-prepend">
-																		<span class="input-group-text" id="basic-addon3">Category Name</span>
-																	</div>
-																	<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" name="category_name" value="<?php echo $row['category_name'] ?>">
-																	<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-																	<input type="hidden" name="parent_id" value="<?php echo $row['parent_id'] ?>">
+									</div>
+									<!-- Modal Fix -->
+									<div class="modal fade" id="<?php echo "modal-fix".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Modal Fix</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<form action="index.php" method="POST">
+													<div class="modal-body">
+														<div class="modal-body-list">
+															<div class="input-group mb-3">
+																<div class="input-group-prepend">
+																	<span class="input-group-text" id="basic-addon3">Category Name</span>
 																</div>
+																<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" name="category_name" value="<?php echo $row['category_name'] ?>">
+																<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
+																<input type="hidden" name="parent_id" value="<?php echo $row['parent_id'] ?>">
 															</div>
 														</div>
-														<div class="modal-footer">
-															<input type="hidden" name="frm" value="update">
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="submit" class="btn btn-primary">Save changes</button>
-														</div>
-													</form>
-												</div>
+													</div>
+													<div class="modal-footer">
+														<input type="hidden" name="frm" value="update">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														<button type="submit" class="btn btn-primary">Save changes</button>
+													</div>
+												</form>
 											</div>
 										</div>
-										<!-- End modal -->
+									</div>
+									<!-- End modal -->
 
-										<!-- Modal SS -->
-										<div class="modal fade" id="<?php echo "modal-ss".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel">Modal Copy</h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<form action="index.php" method="POST">
-														<div class="modal-body">
-															<div class="modal-body-list">
-																<div class="input-group mb-3">
-																	<h1>Bạn có chắc chắn muốn sao chép</h1>
-																	<input type="hidden" name="category_name" value="<?php echo $row['category_name'] ?>">
-																	<input type="hidden" name="parent_id" value="<?php echo $row['parent_id'] ?>">
-																</div>
+									<!-- Modal SS -->
+									<div class="modal fade" id="<?php echo "modal-ss".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Modal Copy</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<form action="index.php" method="POST">
+													<div class="modal-body">
+														<div class="modal-body-list">
+															<div class="input-group mb-3">
+																<h1>Bạn có chắc chắn muốn sao chép</h1>
+																<input type="hidden" name="category_name" value="<?php echo $row['category_name'] ?>">
+																<input type="hidden" name="parent_id" value="<?php echo $row['parent_id'] ?>">
 															</div>
 														</div>
-														<div class="modal-footer">
-															<input type="hidden" name="frm" value="add">
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="submit" class="btn btn-primary">Save changes</button>
-														</div>
-													</form>
-												</div>
+													</div>
+													<div class="modal-footer">
+														<input type="hidden" name="frm" value="add">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														<button type="submit" class="btn btn-primary">Save changes</button>
+													</div>
+												</form>
 											</div>
 										</div>
-										<!-- End modal -->
+									</div>
+									<!-- End modal -->
 
-										<!-- Modal Delete -->
-										<div class="modal fade" id="<?php echo "modal-del".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel">Modal Delete</h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<form action="index.php" method="POST">
-														<div class="modal-body">
-															<div class="modal-body-list">
-																<div class="input-group mb-3">
-																	<h1>Bạn có chắc chắn muốn xoá</h1>
-																	<input type="hidden" name="id" value="<?php echo $idss; ?>">
-																</div>
+									<!-- Modal Delete -->
+									<div class="modal fade" id="<?php echo "modal-del".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Modal Delete</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<form action="index.php" method="POST">
+													<div class="modal-body">
+														<div class="modal-body-list">
+															<div class="input-group mb-3">
+																<h1>Bạn có chắc chắn muốn xoá</h1>
+																<input type="hidden" name="id" value="<?php echo $idss; ?>">
 															</div>
 														</div>
-														<div class="modal-footer">
-															<input type="hidden" name="frm" value="delete">
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-															<button type="submit" class="btn btn-primary">Save changes</button>
-														</div>
-													</form>
-												</div>
+													</div>
+													<div class="modal-footer">
+														<input type="hidden" name="frm" value="delete">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+														<button type="submit" class="btn btn-primary">Save changes</button>
+													</div>
+												</form>
 											</div>
 										</div>
-										<!-- End modal -->
+									</div>
+									<!-- End modal -->
 
-										<!-- Modal CHi tiet -->
-										<div class="modal fade" id="<?php echo "modal-ct".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-											<div class="modal-dialog">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="exampleModalLabel">Modal Detail</h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<form action="index.php" method="POST">
-														<div class="modal-body">
-															<div class="modal-body-list">
-																<div class="input-group mb-3">
-																	<div class="input-group-prepend">
-																		<span class="input-group-text" id="basic-addon3">Category Name</span>
-																	</div>
-																	<input type="text" readonly class="form-control" id="basic-url" aria-describedby="basic-addon3" name="category_name" value="<?php echo $row['category_name'] ?>">
+									<!-- Modal CHi tiet -->
+									<div class="modal fade" id="<?php echo "modal-ct".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h5 class="modal-title" id="exampleModalLabel">Modal Detail</h5>
+													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+														<span aria-hidden="true">&times;</span>
+													</button>
+												</div>
+												<form action="index.php" method="POST">
+													<div class="modal-body">
+														<div class="modal-body-list">
+															<div class="input-group mb-3">
+																<div class="input-group-prepend">
+																	<span class="input-group-text" id="basic-addon3">Category Name</span>
 																</div>
+																<input type="text" readonly class="form-control" id="basic-url" aria-describedby="basic-addon3" name="category_name" value="<?php echo $row['category_name'] ?>">
 															</div>
 														</div>
-														<div class="modal-footer">
-															<input type="hidden" name="frm" value="update">
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-														</div>
-													</form>
-												</div>
+													</div>
+													<div class="modal-footer">
+														<input type="hidden" name="frm" value="update">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+													</div>
+												</form>
 											</div>
 										</div>
-										<!-- End modal -->
-										<?php 
-										$mrleft = 1;
-										foreach ($categories as $row){
-											if($row['parent_id'] == $idss){
-												$num++;
-												?>
-												<div class="category-list-body" style="display: none;">
-													<div class="category-item-body">
-														<div class="category-number"><?php echo $num; ?></div>
-														<div class="category-name-body"><span style="margin-left: <?php echo 20*$mrleft.'px' ?>;">|__</span><?php echo $row['category_name'] ?></div>
-														<div class="category-operations-body">
-															<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-fix".$row['id']; ?>"><div class="ti-eraser"></div></button>
-															<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-ss".$row['id']; ?>"><div class="ti-files"></div></button>
-															<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-del".$row['id']; ?>"><div class="ti-trash"></div></button>
-															<button class="btn" data-toggle="modal" data-target="<?php echo "#modal-ct".$row['id']; ?>"><div class="ti-fullscreen"></div></button>
-														</div>
-													</div>
-												</div>
-												<!-- Modal CHi tiet -->
-												<div class="modal fade" id="<?php echo "modal-ct".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													<div class="modal-dialog">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="exampleModalLabel">Modal Detail</h5>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<form action="index.php" method="POST">
-																<div class="modal-body">
-																	<div class="modal-body-list">
-																		<div class="input-group mb-3">
-																			<div class="input-group-prepend">
-																				<span class="input-group-text" id="basic-addon3">Category Name</span>
-																			</div>
-																			<input type="text" readonly class="form-control" id="basic-url" aria-describedby="basic-addon3" name="category_name" value="<?php echo $row['category_name'] ?>">
-																		</div>
-																	</div>
-																	<div class="moda-body-item">
-																		<h1>Parent Category</h1>
-
-																		<select name="parent_id" disabled>
-																			<?php 
-																			foreach($categories as $row){
-																				if($row['parent_id'] == "parentfirst"){
-																					?>
-																					<option value="<?php echo $row['id']; ?>" <?php if($idss == $row['id']){echo "selected";} ?>><?php echo $row['category_name']; ?></option>
-																					<?php 
-																				}
-																			}
-																			?>
-																		</select>
-																	</div>
-																</div>
-																<div class="modal-footer">
-																	<input type="hidden" name="frm" value="update">
-																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
-												<!-- End modal -->
-												<!-- Modal Delete -->
-												<div class="modal fade" id="<?php echo "modal-del".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													<div class="modal-dialog">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="exampleModalLabel">Modal Delete</h5>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<form action="index.php" method="POST">
-																<div class="modal-body">
-																	<div class="modal-body-list">
-																		<div class="input-group mb-3">
-																			<h1>Bạn có chắc chắn muốn xoá</h1>
-																			<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-																		</div>
-																	</div>
-																</div>
-																<div class="modal-footer">
-																	<input type="hidden" name="frm" value="delete">
-																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																	<button type="submit" class="btn btn-primary">Save changes</button>
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
-												<!-- End modal -->
-
-												<!-- Modal SS -->
-												<div class="modal fade" id="<?php echo "modal-ss".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													<div class="modal-dialog">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="exampleModalLabel">Modal Copy</h5>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<form action="index.php" method="POST">
-																<div class="modal-body">
-																	<div class="modal-body-list">
-																		<div class="input-group mb-3">
-																			<h1>Bạn có chắc chắn muốn sao chép</h1>
-																			<input type="hidden" name="category_name" value="<?php echo $row['category_name'] ?>">
-																			<input type="hidden" name="parent_id" value="<?php echo $row['parent_id'] ?>">
-																		</div>
-																	</div>
-																</div>
-																<div class="modal-footer">
-																	<input type="hidden" name="frm" value="add">
-																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																	<button type="submit" class="btn btn-primary">Save changes</button>
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
-												<!-- End modal -->
-
-												<!-- Modal Fix -->
-												<div class="modal fade" id="<?php echo "modal-fix".$row['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													<div class="modal-dialog">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="exampleModalLabel">Modal Fix</h5>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<form action="index.php" method="POST">
-																<div class="modal-body">
-																	<div class="modal-body-list">
-																		<div class="input-group mb-3">
-																			<div class="input-group-prepend">
-																				<span class="input-group-text" id="basic-addon3">Category Name</span>
-																			</div>
-																			<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" name="category_name" value="<?php echo $row['category_name'] ?>">
-																			<input type="hidden" name="id" value="<?php echo $row['id'] ?>">
-																			<input type="hidden" name="parent_id" value="<?php echo $row['parent_id'] ?>">
-																		</div>
-																	</div>
-																	<div class="moda-body-item">
-																		<h1>Parent Category</h1>
-
-																		<select name="parent_id">
-																			<?php 
-																			foreach($categories as $row){
-																				if($row['parent_id'] == "parentfirst"){
-																					?>
-																					<option value="<?php echo $row['id']; ?>" <?php if($idss == $row['id']){echo "selected";} ?>><?php echo $row['category_name']; ?></option>
-																					<?php 
-																				}
-																			}
-																			?>
-																		</select>
-																	</div>
-																</div>
-																<div class="modal-footer">
-																	<input type="hidden" name="frm" value="update">
-																	<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-																	<button type="submit" class="btn btn-primary">Save changes</button>
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
-												<!-- End modal -->
-												
-												<?php 
-												$mrleft++;
-											}
-										}
-										?>
-										<?php 
-										$num++;
-									}
+									</div>
+									<!-- End modal -->
+									<?php 
+									$num++;
 								}
 								?>
 								<?php
@@ -629,6 +452,7 @@ $cate = $category->read_all();
 											</div>
 										</div>
 										<!-- End modal -->
+										<!-- Sử dụng vòng lặp để tìm những item có quan hệ parent-child  -->
 										<?php 
 										$mrleft = 1;
 										foreach ($categories as $row){
@@ -801,7 +625,6 @@ $cate = $category->read_all();
 													</div>
 												</div>
 												<!-- End modal -->
-												
 												<?php 
 												$mrleft++;
 											}
@@ -817,7 +640,7 @@ $cate = $category->read_all();
 						</div>
 					</div>
 				</div>
-
+				<!-- Kiểm tra tên miền để xác được trang hiện tại và có thể sang trang hoặc lùi -->
 				<div class="footer-all-list">
 					<div class="footer-item-list">
 						<a href="<?php if(isset($_GET['page'])){
@@ -829,6 +652,7 @@ $cate = $category->read_all();
 						}else{
 							$pre = 1;
 						} echo "index.php?page=".$pre; ?>" class="footer-pre">Previous</a>
+						<!-- sử dụng vòng lặp để in ra số mục tương ứng với số phần tử -->
 						<?php 
 						$number_page = count($categories);
 						$total_page = round(($number_page / 10) + 0.3);
